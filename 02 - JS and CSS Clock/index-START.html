@@ -11,14 +11,13 @@
       <div class="clock-face">
         <div class="hand hour-hand"></div>
         <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
+        <div class="hand second-hand" style = "transform: rotate(30deg)"></div>
       </div>
     </div>
 
 
   <style>
     html {
-      background: #018DED url(https://unsplash.it/1500/1000?image=881&blur=5);
       background-size: cover;
       font-family: 'helvetica neue';
       text-align: center;
@@ -26,6 +25,7 @@
     }
 
     body {
+      background-image: url("https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages-wixmp-ed30a86b8c4ca887773594c2.wixmp.com%2Ff%2F88306bd3-4326-4c63-a2c0-3274b666c62c%2Fddzttvq-388cb345-a7fd-40eb-89e8-88437ca24e2a.png%2Fv1%2Ffill%2Fw_485%2Ch_365%2Cstrp%2Fa_nice_simple_background_by_itzt8_ddzttvq-fullview.png%3Ftoken%3DeyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3siaGVpZ2h0IjoiPD0zNjUiLCJwYXRoIjoiXC9mXC84ODMwNmJkMy00MzI2LTRjNjMtYTJjMC0zMjc0YjY2NmM2MmNcL2RkenR0dnEtMzg4Y2IzNDUtYTdmZC00MGViLTg5ZTgtODg0MzdjYTI0ZTJhLnBuZyIsIndpZHRoIjoiPD00ODUifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6aW1hZ2Uub3BlcmF0aW9ucyJdfQ.NYtdCNyEt92rAycUk0DNGQ3EgjGDjSd8V31nwW0u0Q4&imgrefurl=https%3A%2F%2Fwww.deviantart.com%2Fitzt8%2Fart%2FA-Nice-Simple-Background-846238598&tbnid=IPlL0t7ONxyD-M&vet=12ahUKEwi8tYyrwO7vAhUq2eAKHbTjDWMQMygeegUIARCTAg..i&docid=Uo79RaGpAe4OjM&w=485&h=365&q=nice%20simple%20background&ved=2ahUKEwi8tYyrwO7vAhUq2eAKHbTjDWMQMygeegUIARCTAg");
       margin: 0;
       font-size: 2rem;
       display: flex;
@@ -56,18 +56,60 @@
       transform: translateY(-3px); /* account for the height of the clock hands */
     }
 
-    .hand {
-      width: 50%;
-      height: 6px;
-      background: black;
+    .hand{
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transform: rotate(90deg);
+    }
+
+    .min-hand{
+      width: 50%;
+      height: 6px;
+      background:red;
+    }
+
+    .second-hand {
+      width: 50%;
+      height: 6px;
+      background: pink;  
+    }
+
+    .hour-hand {
+      width: 100px;
+      left: 17%;
+      height: 6px;
+      background: black;
     }
 
   </style>
 
   <script>
+    
+    function setDate(){
+      const now = new Date();
 
+      const sec = now.getSeconds();
+      const secHand = document.querySelector('.second-hand');
+      const secDegree = ((sec/60)*360) +90;
+      secHand.style.transform = `rotate(${secDegree}deg)`;
+      console.log(sec);
+
+      const min = now.getMinutes();
+      const minHand = document.querySelector('.min-hand');
+      const minDegree = ((min/60) *360) +90;
+      minHand.style.transform = `rotate(${minDegree}deg)`;
+      
+      const hour = now.getHours();
+      const hourHand = document.querySelector('.hour-hand');
+      const hourDegree = ((hour/12)*360)+90;
+      hourHand.style.transform = `rotate(${hourDegree}deg)`;
+      // console.log(sec);
+      // console.log(min);
+      // console.log(hour);
+    }
+
+    setInterval(setDate, 1000);
 
   </script>
 </body>
